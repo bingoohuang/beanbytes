@@ -6,6 +6,7 @@ import org.n3r.bytes.annotations.BytesNum;
 import org.n3r.bytes.base.FieldFromBytesAware;
 import org.n3r.bytes.util.Bytes;
 import org.n3r.bytes.util.Fields;
+import org.n3r.bytes.util.Utils;
 
 import static org.n3r.bytes.util.Bytes.*;
 
@@ -17,7 +18,8 @@ public class StringFieldFromBytes implements FieldFromBytesAware {
         short bytesLen = jcBytes == null ? toShort(bytes, offset) : jcBytes.value();
         int returnOffset = jcBytes == null ? 2 : 0;
 
-        String strValue = Bytes.toString(bytes, offset + returnOffset, bytesLen);
+        String strValue = Bytes.toString(bytes, offset + returnOffset, bytesLen,
+                Utils.getCharsetName(field));
 
         Fields.setFieldValue(field, bean, strValue);
         return returnOffset + bytesLen;

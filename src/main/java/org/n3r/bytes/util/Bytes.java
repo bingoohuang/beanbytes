@@ -2,7 +2,25 @@ package org.n3r.bytes.util;
 
 import java.io.UnsupportedEncodingException;
 
+import javax.xml.bind.DatatypeConverter;
+
 public class Bytes {
+    public static String toBase64(byte[] bytes) {
+        return DatatypeConverter.printBase64Binary(bytes);
+    }
+
+    public static byte[] fromBase64(String str) {
+        return DatatypeConverter.parseBase64Binary(str);
+    }
+
+    public static String toHex(byte[] bytes) {
+        return DatatypeConverter.printHexBinary(bytes);
+    }
+
+    public static byte[] fromHex(String str) {
+        return DatatypeConverter.parseHexBinary(str);
+    }
+
     public static byte[] getBytes(String str) {
         try {
             return str.getBytes("UTF-8");
@@ -11,13 +29,25 @@ public class Bytes {
         }
     }
 
+    public static byte[] getBytes(String str, String charsetName) {
+        try {
+            return str.getBytes(charsetName);
+        } catch (UnsupportedEncodingException e) {
+            throw Throws.propagate(e);
+        }
+    }
+
     public static String toString(final byte[] b) {
-        return toString(b, 0, b.length);
+        return toString(b, 0, b.length, "UTF-8");
     }
 
     public static String toString(final byte[] b, int off, int len) {
+        return toString(b, off, len, "UTF-8");
+    }
+
+    public static String toString(final byte[] b, int off, int len, String charsetName) {
         try {
-            return new String(b, off, len, "UTF-8");
+            return new String(b, off, len, charsetName);
         } catch (Exception e) {
             throw Throws.propagate(e);
         }
