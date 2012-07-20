@@ -41,6 +41,10 @@ public class Bytes {
         return toString(b, 0, b.length, "UTF-8");
     }
 
+    public static String toString(final byte[] b, String charsetName) {
+        return toString(b, 0, b.length, charsetName);
+    }
+
     public static String toString(final byte[] b, int off, int len) {
         return toString(b, off, len, "UTF-8");
     }

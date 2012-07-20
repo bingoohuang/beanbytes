@@ -21,11 +21,17 @@ public class UnicodePersonTest {
 
         byte[] bytes = toBytes.toBytes(unicodePerson);
         System.out.println(toBytes.getDesc());
-        assertArrayEquals(Bytes.getBytes(address, "UTF-16"), Bytes.subBytes(bytes, 2));
+        assertArrayEquals(Bytes.getBytes(address, "UTF-16BE"), Bytes.subBytes(bytes, 2));
 
         FromBytesAware<UnicodePerson> fromBytes = new DefaultFromBytes<UnicodePerson>();
         UnicodePerson unicodePerson2 = fromBytes.fromBytes(bytes, UnicodePerson.class);
 
         assertEquals(address, unicodePerson2.getAddress());
+
+        unicodePerson = new UnicodePerson();
+        unicodePerson.setAddress("te");
+        bytes = toBytes.toBytes(unicodePerson);
+        System.out.println(toBytes.getDesc());
+
     }
 }

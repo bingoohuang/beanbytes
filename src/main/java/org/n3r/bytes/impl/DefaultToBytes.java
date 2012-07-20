@@ -11,7 +11,6 @@ import static org.n3r.bytes.util.Bytes.*;
 
 public class DefaultToBytes implements ToBytesAware<Object> {
     private String desc;
-    private byte[] result;
     private StringBuilder display;
 
     @Override
@@ -29,7 +28,7 @@ public class DefaultToBytes implements ToBytesAware<Object> {
             return bytes;
         }
 
-        result = new byte[0];
+        byte[] result = new byte[0];
         display = new StringBuilder();
 
         Field[] declaredFields = beanClass.getDeclaredFields();
